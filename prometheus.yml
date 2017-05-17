@@ -18,10 +18,6 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
 
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
-
   - job_name: 'isp-monitor'
     static_configs:
       - targets: ['collectd-exporter:9103']      
