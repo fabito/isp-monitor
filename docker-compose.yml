@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+
+  collectd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fabito/isp-monitor:latest
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  collectd-exporter:
+    image: prom/collectd-exporter
+    ports:
+      - 9103:9103
+      - 25826:25826/udp
+    command: -collectd.listen-address=":25826"
+
